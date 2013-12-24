@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CenterMass.cs" />
      <Compile Include="Assets\Endless2DTerrain\Core\Scripts\Extensions.cs" />
      <Compile Include="Assets\Endless2DTerrain\Core\Scripts\MeshPiece.cs" />
      <Compile Include="Assets\Endless2DTerrain\Core\Scripts\PrefabManager.cs" />
@@ -65,18 +64,19 @@
      <Compile Include="Assets\Endless2DTerrain\Demos\Scripts\CoinPickup.cs" />
      <Compile Include="Assets\Endless2DTerrain\Demos\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\EventsManager.cs" />
-     <Compile Include="Assets\GUITest.cs" />
-     <Compile Include="Assets\GameScreen.cs" />
      <Compile Include="Assets\MainController.cs" />
-     <Compile Include="Assets\MainGUI.cs" />
-     <Compile Include="Assets\MainScreen.cs" />
      <Compile Include="Assets\Model.cs" />
      <Compile Include="Assets\ScreenManager.cs" />
-     <Compile Include="Assets\ScriptOrthCamera.cs" />
      <Compile Include="Assets\SimpleSprite.cs" />
-     <Compile Include="Assets\Test.cs" />
-     <Compile Include="Assets\TruckControll.cs" />
-     <Compile Include="Assets\Wheel.cs" />
+     <Compile Include="Assets\gameEngine\CenterMass.cs" />
+     <Compile Include="Assets\gameEngine\ScriptOrthCamera.cs" />
+     <Compile Include="Assets\gameEngine\TruckControll.cs" />
+     <Compile Include="Assets\gameEngine\Wheel.cs" />
+     <Compile Include="Assets\guis\GUITest.cs" />
+     <Compile Include="Assets\guis\MainGUI.cs" />
+     <Compile Include="Assets\screens\GameScreen.cs" />
+     <Compile Include="Assets\screens\IScreen.cs" />
+     <Compile Include="Assets\screens\StartMenuScreen.cs" />
      <None Include="Assets\Endless2DTerrain\Demos\Resources\Shaders\VertexColorUnlit.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

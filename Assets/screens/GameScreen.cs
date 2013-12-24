@@ -1,17 +1,18 @@
 using UnityEngine;
 using System.Collections;
 
-public class GameScreen : MonoBehaviour
+public class GameScreen : IScreen
 {
 		private	TerrainDisplayer terrain;
 		private TruckControll truck;
 		private GUITest truckGUI;
 
-		~GameScreen ()
+		override public void destroy ()
 		{
-				Destroy (terrain);
-				Destroy (truck);
-				Destroy (truckGUI);
+
+				MonoBehaviour.Destroy (terrain.gameObject);
+				MonoBehaviour.Destroy (truck.gameObject);
+				MonoBehaviour.Destroy (truckGUI.gameObject);
 		}
 		// Use this for initialization
 		void Start ()
@@ -25,17 +26,17 @@ public class GameScreen : MonoBehaviour
 	
 		}
 
-		private void createGame ()
+		override public void create ()
 		{
 		
 				UnityEngine.Object pPrefab = Resources.Load ("perfabs/terrains/terrain1");
-				terrain = (Instantiate (pPrefab) as GameObject).GetComponent (typeof(TerrainDisplayer)) as TerrainDisplayer;
+				terrain = (MonoBehaviour.Instantiate (pPrefab) as GameObject).GetComponent (typeof(TerrainDisplayer)) as TerrainDisplayer;
 		
 				pPrefab = Resources.Load ("perfabs/GUI/GUI");
-				truckGUI = (Instantiate (pPrefab) as GameObject).GetComponent (typeof(GUITest)) as GUITest;
+				truckGUI = (MonoBehaviour.Instantiate (pPrefab) as GameObject).GetComponent (typeof(GUITest)) as GUITest;
 		
-				pPrefab = Resources.Load ("perfabs/cars/truck1");
-				truck = (Instantiate (pPrefab) as GameObject).GetComponent (typeof(TruckControll)) as TruckControll;
+				pPrefab = Resources.Load ("perfabs/cars/" + Model.curCar);
+				truck = (MonoBehaviour.Instantiate (pPrefab) as GameObject).GetComponent (typeof(TruckControll)) as TruckControll;
 		
 				truckGUI.truck = truck;
 		

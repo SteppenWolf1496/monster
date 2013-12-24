@@ -6,6 +6,7 @@ public class ScreenManager : MonoBehaviour
 
 		public enum Screens
 		{
+				NONE,
 				START_MENU,
 				CHOOSE_CAR_MENU,
 				CHOOSE_MAP_MENU,
@@ -14,17 +15,28 @@ public class ScreenManager : MonoBehaviour
 
 
 		
+		private static IScreen screenInstance;
+		private static Screens curScreen;
 
-		private static int curScreen;
 
-
-		public static void showScreen (int _name)
+		public static void showScreen (Screens _name)
 		{
+				if (curScreen == _name)
+						return;
 
-
+				curScreen = _name;
+				if (screenInstance != null)
+						screenInstance.destroy ();
+				
 				switch (_name) {
-		case START_MENU: 
-
+				case Screens.START_MENU:
+						screenInstance = new StartMenuScreen ();
+						(screenInstance as StartMenuScreen).create ();
+						break;
+				case Screens.GAME:
+						screenInstance = new GameScreen ();
+						(screenInstance as GameScreen).create ();
+						break;
 				}
 		}
 

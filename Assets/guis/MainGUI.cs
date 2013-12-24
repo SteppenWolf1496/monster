@@ -9,31 +9,43 @@
 // ------------------------------------------------------------------------------
 using UnityEngine;
 using System.Collections;
-	public class MainGUI : MonoBehaviour
+public class MainGUI : MonoBehaviour
+{
+		private GUIStyle style;
+		void Start ()
 		{
-				public MainGUI ()
-				{
+				style = new GUIStyle ();
+				style.fontSize = 30;
+		}
+	
+		// Update is called once per frame
+		void Update ()
+		{
+		
+		}
+	
+		void OnGUI ()
+		{
+
+			
+			
+				float bWidth = UnityEngine.Screen.width / 5;
+				float bHeight = UnityEngine.Screen.height / 3;
+				if (GUI.RepeatButton (new Rect (Screen.width - bWidth, Screen.height - bHeight, bWidth, bHeight), "car 1")) {
+						Model.curCar = "truck";
+						ScreenManager.showScreen (ScreenManager.Screens.GAME);
 				}
-
-		void OnGUI () {
-
 			
-			
-			float bWidth = UnityEngine.Screen.width / 5;
-			float bHeight = UnityEngine.Screen.height / 3;
-			if (GUI.RepeatButton(new Rect (Screen.width - bWidth,Screen.height - bHeight,bWidth,bHeight), "accelerate")) {
-
-			}
-			
-			if (GUI.RepeatButton (new Rect (0,Screen.height - bHeight,bWidth,bHeight), "breake")) {
-
-			}
+				if (GUI.RepeatButton (new Rect (0, Screen.height - bHeight, bWidth, bHeight), "car 2")) {
+						Model.curCar = "truck1";
+						ScreenManager.showScreen (ScreenManager.Screens.GAME);
+				}
 			
 
 			
 
 		}
-		}
+}
 
 
 
