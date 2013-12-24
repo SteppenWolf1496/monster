@@ -64,30 +64,20 @@
      <Compile Include="Assets\Endless2DTerrain\Demos\Scripts\ChaseCamera.cs" />
      <Compile Include="Assets\Endless2DTerrain\Demos\Scripts\CoinPickup.cs" />
      <Compile Include="Assets\Endless2DTerrain\Demos\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\EventsManager.cs" />
      <Compile Include="Assets\GUITest.cs" />
+     <Compile Include="Assets\GameScreen.cs" />
+     <Compile Include="Assets\MainController.cs" />
+     <Compile Include="Assets\MainGUI.cs" />
+     <Compile Include="Assets\MainScreen.cs" />
+     <Compile Include="Assets\Model.cs" />
+     <Compile Include="Assets\ScreenManager.cs" />
      <Compile Include="Assets\ScriptOrthCamera.cs" />
      <Compile Include="Assets\SimpleSprite.cs" />
      <Compile Include="Assets\Test.cs" />
      <Compile Include="Assets\TruckControll.cs" />
      <Compile Include="Assets\Wheel.cs" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Particle Shaders\Mobile Multiply Culled.shader" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Miscellaneous Shaders\Mobile Background.shader" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Vertex Colored Shaders\Mobile Transparent Vertex Color.shader" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Miscellaneous Shaders\Mobile Detail.shader" />
-     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Lightmap Shaders (Legacy)\Mobile Lightmap Reflective.shader" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Particle Shaders\Mobile Particles Additive Culled.shader" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Vertex Colored Shaders\Mobile Vertex Colored.shader" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Lightmap Shaders (Legacy)\Mobile Lightmap Only.shader" />
-     <None Include="Assets\Standard Assets (Mobile)\Shaders\Lightmap Shaders (Legacy)\Mobile Lightmap AlphaTest.shader" />
      <None Include="Assets\Endless2DTerrain\Demos\Resources\Shaders\VertexColorUnlit.shader" />
- <Reference Include="Library\ScriptAssemblies\Assembly-UnityScript-firstpass">
- <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
- </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{491C9103-A9DF-703E-6E6E-FB9FDCDBB2B5}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

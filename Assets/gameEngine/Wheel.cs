@@ -71,10 +71,14 @@ public class Wheel : MonoBehaviour
 				//retCollider.collider.
 				return retCollider;
 		}
+
+		void FixedUpdate(){
+				updateBestCollider ();
+		}
 	
 		void Update ()// Update is called once per frame
 		{
-				updateBestCollider ();
+				//updateBestCollider ();
 		}
 		//bool wasStopped = true;
 		public void setTorque (float _accel, float _breake, float _carVelocity, float _breaktorque)
@@ -165,8 +169,10 @@ public class Wheel : MonoBehaviour
 								}
 						}
 				}
+
+				//Quaternion.Lerp
 				if (bestWheel != null) {
-						defWheelCol.transform.localRotation = Quaternion.Slerp (defWheelCol.transform.localRotation, bestWheel.transform.localRotation, /*Time.time * */0.03f);//bestWheel.transform.localRotation ;	
+						defWheelCol.transform.localRotation = Quaternion.Lerp (defWheelCol.transform.localRotation, bestWheel.transform.localRotation, Time.deltaTime *0.03f);//bestWheel.transform.localRotation ;	
 				} 
 
 		}

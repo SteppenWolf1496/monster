@@ -17,6 +17,8 @@ public class GUITest : MonoBehaviour {
 	}
 	
 	void OnGUI () {
+		if (truck == null)
+						return;
 		float accel = 0;
 		float breake = 0;
 		
