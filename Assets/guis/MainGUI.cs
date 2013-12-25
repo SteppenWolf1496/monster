@@ -31,19 +31,31 @@ public class MainGUI : MonoBehaviour
 			
 				float bWidth = UnityEngine.Screen.width / 5;
 				float bHeight = UnityEngine.Screen.height / 3;
-				if (GUI.RepeatButton (new Rect (Screen.width - bWidth, Screen.height - bHeight, bWidth, bHeight), "car 1")) {
-						Model.curCar = "truck";
-						ScreenManager.showScreen (ScreenManager.Screens.GAME);
+				if (GUI.Button (new Rect (Screen.width - bWidth, Screen.height - bHeight, bWidth, bHeight), "next")) {
+						Model.curCarIndex++;
+						checkCar ();
+						(ScreenManager.getCurScreen () as StartMenuScreen).changeCar ();
 				}
 			
-				if (GUI.RepeatButton (new Rect (0, Screen.height - bHeight, bWidth, bHeight), "car 2")) {
-						Model.curCar = "truck1";
+				if (GUI.Button (new Rect (0, Screen.height - bHeight, bWidth, bHeight), "prew")) {
+						Model.curCarIndex--;
+						checkCar ();
+						(ScreenManager.getCurScreen () as StartMenuScreen).changeCar ();
+				}
+			
+				if (GUI.Button (new Rect (Screen.width / 2 - bWidth / 2, 0, bWidth, bHeight), "S T A R T")) {
 						ScreenManager.showScreen (ScreenManager.Screens.GAME);
 				}
 			
 
-			
+		}
+		void checkCar ()
+		{
+				if (Model.curCarIndex < 0)
+						Model.curCarIndex = Model.cars.Length - 1;
 
+				if (Model.curCarIndex >= Model.cars.Length)
+						Model.curCarIndex = 0;
 		}
 }
 

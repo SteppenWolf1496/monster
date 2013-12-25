@@ -9,10 +9,13 @@ public class GameScreen : IScreen
 
 		override public void destroy ()
 		{
-
-				MonoBehaviour.Destroy (terrain.gameObject);
-				MonoBehaviour.Destroy (truck.gameObject);
-				MonoBehaviour.Destroy (truckGUI.gameObject);
+				truckGUI.truck = null;
+				MonoBehaviour.DestroyImmediate (terrain.gameObject, true);
+				MonoBehaviour.DestroyImmediate (truck.gameObject, true);
+				MonoBehaviour.DestroyImmediate (truckGUI.gameObject, true);
+				terrain = null;
+				truck = null;
+				truckGUI = null;
 		}
 		// Use this for initialization
 		void Start ()
@@ -35,7 +38,7 @@ public class GameScreen : IScreen
 				pPrefab = Resources.Load ("perfabs/GUI/GUI");
 				truckGUI = (MonoBehaviour.Instantiate (pPrefab) as GameObject).GetComponent (typeof(GUITest)) as GUITest;
 		
-				pPrefab = Resources.Load ("perfabs/cars/" + Model.curCar);
+				pPrefab = Resources.Load ("perfabs/cars/" + Model.cars [Model.curCarIndex]);
 				truck = (MonoBehaviour.Instantiate (pPrefab) as GameObject).GetComponent (typeof(TruckControll)) as TruckControll;
 		
 				truckGUI.truck = truck;

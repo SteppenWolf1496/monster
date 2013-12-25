@@ -28,13 +28,16 @@ public class TruckControll : MonoBehaviour
 		// Use this for initialization
 		public Camera playerCamera;
 		
-	int CompareCondition(Wheel itemA, Wheel itemB) {
-		if (itemA.defWheelCol.radius*(itemA.isDrive?1:0) < itemB.defWheelCol.radius*(itemB.isDrive?1:0) ) return 1;
-		if (itemA.defWheelCol.radius*(itemA.isDrive?1:0) > itemB.defWheelCol.radius*(itemB.isDrive?1:0) ) return -1;
-		return 0;
-	}
+		int CompareCondition (Wheel itemA, Wheel itemB)
+		{
+				if (itemA.defWheelCol.radius * (itemA.isDrive ? 1 : 0) < itemB.defWheelCol.radius * (itemB.isDrive ? 1 : 0))
+						return 1;
+				if (itemA.defWheelCol.radius * (itemA.isDrive ? 1 : 0) > itemB.defWheelCol.radius * (itemB.isDrive ? 1 : 0))
+						return -1;
+				return 0;
+		}
 
-	void Start ()
+		void Start ()
 		{
 
 				if (playerCamera == null) {
@@ -50,21 +53,21 @@ public class TruckControll : MonoBehaviour
 				startRotaion = this.transform.rotation;
 				
 				float radiusSumm = 0;
-				Array.Sort (wheels,CompareCondition);
+				Array.Sort (wheels, CompareCondition);
 				torqByWheel = new float[wheels.Length];
 				int notDrive = 0;
 
-				for (int i=0;i<wheels.Length;i++){
-					if (wheels[i].isDrive)
-						radiusSumm +=wheels[i].defWheelCol.radius;
-					else 
-						notDrive++;
+				for (int i=0; i<wheels.Length; i++) {
+						if (wheels [i].isDrive)
+								radiusSumm += wheels [i].defWheelCol.radius;
+						else 
+								notDrive++;
 				}
 
 				float middleTorq = engineTorque / radiusSumm;
 
 				for (int i=0; i<wheels.Length-notDrive; i++) {
-					wheels[wheels.Length-i-1-notDrive].setTorq(wheels[i].defWheelCol.radius*middleTorq);
+						wheels [wheels.Length - i - 1 - notDrive].setTorq (wheels [i].defWheelCol.radius * middleTorq);
 				}
 				
 				
@@ -101,7 +104,7 @@ public class TruckControll : MonoBehaviour
 		
 		
 				foreach (Wheel w in wheels) { 
-						w.UpdateWheel (delta,transform);
+						w.UpdateWheel (delta, transform);
 				}	
 		}
 		
@@ -109,7 +112,7 @@ public class TruckControll : MonoBehaviour
 		{
 				
 				foreach (Wheel w in wheels) { 
-					w.setTorque (accel, breake, transform.rigidbody.velocity.x, breakeTorque);
+						w.setTorque (accel, breake, transform.rigidbody.velocity.x, breakeTorque);
 				}		
 		
 				

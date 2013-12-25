@@ -4,8 +4,9 @@ using System.Collections;
 public class Wheel : MonoBehaviour
 {
 		//public LayerMask layer;
-		private Vector3 wheelStartTransform; //4
+		//private Vector3 wheelStartTransform; //4
 		public Transform wheelTransformBack = null; //4
+		public GameObject wheelRotating = null;
 		private WheelCollider[] colliders = new WheelCollider[5]; //5
 		public WheelCollider defWheelCol;
 		private Vector3 wheelStartPos; //6 
@@ -17,16 +18,18 @@ public class Wheel : MonoBehaviour
 		private float wheelRadius, wheelOffset;
 		private Quaternion defRotForDefCol;
 		private float torq = 0;
+		private bool inited = false;
 		// Use this for initializationx
 		void Start ()
 		{
+				inited = true;
 				//updateBestCollider ();
-				wheelStartPos = transform.localPosition;
+				wheelStartPos = wheelRotating.transform.localPosition;
 				wheelRadius = defWheelCol.radius;
 				wheelOffset = defWheelCol.suspensionDistance;
 				defRotForDefCol = defWheelCol.transform.localRotation;
-				wheelStartTransform = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
-				
+				//wheelStartTransform = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+				//transform.position = defWheelCol.transform.position;
 				// fill colliders
 
 				for (int i=0; i<5; i++) {
@@ -34,8 +37,9 @@ public class Wheel : MonoBehaviour
 				}
 		}
 
-		public void setTorq(float torque){
-			torq = torque;
+		public void setTorq (float torque)
+		{
+				torq = torque;
 		}
 	
 		private WheelCollider generateWheelCollider (int i, float angle)
@@ -72,7 +76,8 @@ public class Wheel : MonoBehaviour
 				return retCollider;
 		}
 
-		void FixedUpdate(){
+		void FixedUpdate ()
+		{
 				updateBestCollider ();
 		}
 	
@@ -91,14 +96,14 @@ public class Wheel : MonoBehaviour
 						} else {
 								defWheelCol.brakeTorque = 0;
 								if (isDrive)
-									defWheelCol.motorTorque = _accel * torq;
+										defWheelCol.motorTorque = _accel * torq;
 						}
 						//_accel = 0f;
 				} else if (_accel != 0) {
 						
 						defWheelCol.brakeTorque = 0;
 						if (isDrive)
-							defWheelCol.motorTorque = _accel * torq;
+								defWheelCol.motorTorque = _accel * torq;
 				} else {
 						defWheelCol.brakeTorque = 0;
 						defWheelCol.motorTorque = 0;
@@ -107,29 +112,30 @@ public class Wheel : MonoBehaviour
 	
 		public void UpdateWheel (float _delta, Transform _transform)
 		{
-				
+				if (inited == false)
+						return;
 				WheelHit hit;
 				//defWheelCol.transform.localRotation = defRotForDefCol;
-				Vector3 lp = transform.localPosition; //15
+				Vector3 lp = wheelRotating.transform.localPosition; //15
 				
 				if (defWheelCol.GetGroundHit (out hit)) { //16
-						if (lp.y - (Vector3.Dot (transform.position - hit.point, _transform.up) - wheelRadius) >= wheelStartPos.y/* || (Vector3.Dot (transform.position - hit.point, _transform.up) - wheelRadius) < 0*/) {
-							lp.y = wheelStartPos.y;
+						if (lp.y - (Vector3.Dot (wheelRotating.transform.position - hit.point, _transform.up) - wheelRadius) >= wheelStartPos.y/* || (Vector3.Dot (transform.position - hit.point, _transform.up) - wheelRadius) < 0*/) {
+								lp.y = wheelStartPos.y;
 						} else {
-							lp.y -= Vector3.Dot (transform.position - hit.point, _transform.up) - wheelRadius; 
+								lp.y -= Vector3.Dot (wheelRotating.transform.position - hit.point, _transform.up) - wheelRadius; 
 						}
 				} else { 
 			
 						lp.y = wheelStartPos.y - wheelOffset; //18
 						lp.z = wheelStartPos.z; //18
 				}
-				transform.localPosition = lp; //1
+				wheelRotating.transform.localPosition = lp; //1
 				if (wheelTransformBack != null) {
-					wheelTransformBack.localPosition = lp; //19
+						wheelTransformBack.localPosition = lp; //19
 				}
 				
 				rotation = Mathf.Repeat (rotation + _delta * defWheelCol.rpm * 360.0f / 60.0f, 360.0f); //20
-				transform.localRotation = Quaternion.Euler (-rotation, 0f, 90.0f); //21
+				wheelRotating.transform.localRotation = Quaternion.Euler (-rotation, 0f, 90.0f); //21
 				
 				
 				//if (rotateWheelColliders)
@@ -172,7 +178,7 @@ public class Wheel : MonoBehaviour
 
 				//Quaternion.Lerp
 				if (bestWheel != null) {
-						defWheelCol.transform.localRotation = Quaternion.Lerp (defWheelCol.transform.localRotation, bestWheel.transform.localRotation, Time.deltaTime *0.03f);//bestWheel.transform.localRotation ;	
+						defWheelCol.transform.localRotation = Quaternion.Lerp (defWheelCol.transform.localRotation, bestWheel.transform.localRotation, Time.deltaTime * 0.03f);//bestWheel.transform.localRotation ;	
 				} 
 
 		}

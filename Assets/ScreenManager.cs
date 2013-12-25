@@ -18,6 +18,11 @@ public class ScreenManager : MonoBehaviour
 		private static IScreen screenInstance;
 		private static Screens curScreen;
 
+		public static IScreen getCurScreen ()
+		{
+				return screenInstance;
+		}
+
 
 		public static void showScreen (Screens _name)
 		{
@@ -25,9 +30,11 @@ public class ScreenManager : MonoBehaviour
 						return;
 
 				curScreen = _name;
-				if (screenInstance != null)
+				if (screenInstance != null) {
 						screenInstance.destroy ();
-				
+						screenInstance = null;
+				}
+				MainController.instance ().resetCamera ();
 				switch (_name) {
 				case Screens.START_MENU:
 						screenInstance = new StartMenuScreen ();

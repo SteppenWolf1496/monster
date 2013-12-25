@@ -49,7 +49,8 @@ public class GUITest : MonoBehaviour
 						breake = 1;
 						accel = 1;
 				}
-		
+				if (truck == null)
+						return;
 				truck.setAcceleration (accel);
 				truck.setBreake (breake);
 		
