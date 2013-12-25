@@ -6,7 +6,7 @@ public class Wheel : MonoBehaviour
 		//public LayerMask layer;
 		//private Vector3 wheelStartTransform; //4
 		public Transform wheelTransformBack = null; //4
-		public GameObject wheelRotating = null;
+		
 		private WheelCollider[] colliders = new WheelCollider[5]; //5
 		public WheelCollider defWheelCol;
 		private Vector3 wheelStartPos; //6 
@@ -24,7 +24,7 @@ public class Wheel : MonoBehaviour
 		{
 				inited = true;
 				//updateBestCollider ();
-				wheelStartPos = wheelRotating.transform.localPosition;
+				wheelStartPos = transform.localPosition;
 				wheelRadius = defWheelCol.radius;
 				wheelOffset = defWheelCol.suspensionDistance;
 				defRotForDefCol = defWheelCol.transform.localRotation;
@@ -116,26 +116,26 @@ public class Wheel : MonoBehaviour
 						return;
 				WheelHit hit;
 				//defWheelCol.transform.localRotation = defRotForDefCol;
-				Vector3 lp = wheelRotating.transform.localPosition; //15
+				Vector3 lp = transform.localPosition; //15
 				
 				if (defWheelCol.GetGroundHit (out hit)) { //16
-						if (lp.y - (Vector3.Dot (wheelRotating.transform.position - hit.point, _transform.up) - wheelRadius) >= wheelStartPos.y/* || (Vector3.Dot (transform.position - hit.point, _transform.up) - wheelRadius) < 0*/) {
+						if (lp.y - (Vector3.Dot (transform.position - hit.point, _transform.up) - wheelRadius) >= wheelStartPos.y/* || (Vector3.Dot (transform.position - hit.point, _transform.up) - wheelRadius) < 0*/) {
 								lp.y = wheelStartPos.y;
 						} else {
-								lp.y -= Vector3.Dot (wheelRotating.transform.position - hit.point, _transform.up) - wheelRadius; 
+								lp.y -= Vector3.Dot (transform.position - hit.point, _transform.up) - wheelRadius; 
 						}
 				} else { 
 			
 						lp.y = wheelStartPos.y - wheelOffset; //18
 						lp.z = wheelStartPos.z; //18
 				}
-				wheelRotating.transform.localPosition = lp; //1
+				transform.localPosition = lp; //1
 				if (wheelTransformBack != null) {
 						wheelTransformBack.localPosition = lp; //19
 				}
 				
 				rotation = Mathf.Repeat (rotation + _delta * defWheelCol.rpm * 360.0f / 60.0f, 360.0f); //20
-				wheelRotating.transform.localRotation = Quaternion.Euler (-rotation, 0f, 90.0f); //21
+				transform.localRotation = Quaternion.Euler (-rotation, 0f, 90.0f); //21
 				
 				
 				//if (rotateWheelColliders)
